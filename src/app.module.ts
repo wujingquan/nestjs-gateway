@@ -1,9 +1,10 @@
-import { Module } from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { getConfig } from './utils';
+import { FeishuModule } from './feishu/feishu.module';
 
 @Module({
   imports: [
@@ -13,6 +14,10 @@ import { getConfig } from './utils';
       isGlobal: true,
       load: [getConfig],
     }),
+    CacheModule.register({
+      isGlobal: true,
+    }),
+    FeishuModule,
   ],
   controllers: [AppController],
   providers: [AppService],
