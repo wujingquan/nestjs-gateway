@@ -14,6 +14,8 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const response = ctx.getResponse<FastifyReply>();
     const request = ctx.getRequest<FastifyRequest>();
 
+    console.log('exception', exception);
+
     // 非 HTTP 标准异常的处理。
     response.status(HttpStatus.SERVICE_UNAVAILABLE).send({
       statusCode: HttpStatus.SERVICE_UNAVAILABLE,

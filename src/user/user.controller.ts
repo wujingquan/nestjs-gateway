@@ -11,6 +11,8 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ConfigService } from '@nestjs/config';
+import { ApiOperation } from '@nestjs/swagger';
+import { AddUserDto } from './dto/user.dto';
 
 @Controller('user')
 export class UserController {
@@ -47,5 +49,11 @@ export class UserController {
   @Get('getTestName')
   getTestName() {
     return this.configService.get('TEST_VALUE').name;
+  }
+
+  @ApiOperation({ summary: '新增用户' })
+  @Post('add')
+  add(@Body() user: AddUserDto) {
+    return this.userService.createOrSave(user);
   }
 }

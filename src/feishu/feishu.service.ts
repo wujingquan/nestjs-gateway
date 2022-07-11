@@ -50,6 +50,7 @@ export class FeishuService {
           ttl: response.expire - 60,
         });
       } else {
+        console.log(response);
         throw new BusinessException('飞书调用异常');
       }
     }
