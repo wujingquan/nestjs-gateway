@@ -11,7 +11,7 @@ import { FeishuService } from './feishu.service';
 import { CreateFeishuDto } from './dto/create-feishu.dto';
 import { UpdateFeishuDto } from './dto/update-feishu.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { FeishuMessageDto } from './dto/feishu.dto';
+import { FeishuMessageDto, GetUserTokenDto } from './dto/feishu.dto';
 
 @ApiTags('飞书')
 @Controller('feishu')
@@ -48,5 +48,12 @@ export class FeishuController {
   async sendMessage(@Body() params: FeishuMessageDto) {
     const { receive_id_type, ...rest } = params;
     return this.feishuService.sendMessage(receive_id_type, rest);
+  }
+
+  @ApiOperation({ summary: '获取用户凭证' })
+  @Post('getUserToken')
+  getUserToken(@Body() params: GetUserTokenDto) {
+    const { code } = params;
+    return this.feishuService.getUserToken(code);
   }
 }

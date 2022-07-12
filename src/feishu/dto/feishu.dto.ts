@@ -2,6 +2,11 @@ import { ApiProperty } from '@nestjs/swagger';
 import { MSG_TYPE, RECEIVE_TYPE } from 'src/helper/feishu/message';
 import { IsEnum, IsNotEmpty } from 'class-validator';
 
+export class GetUserTokenDto {
+  code: string;
+  app_token: string;
+}
+
 export class FeishuMessageDto {
   @IsNotEmpty()
   @IsEnum(RECEIVE_TYPE)
