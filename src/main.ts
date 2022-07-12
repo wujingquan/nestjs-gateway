@@ -9,13 +9,19 @@ import { AllExceptionsFilter } from './common/exceptions/base.exception.filter';
 import { HttpExceptionFilter } from './common/exceptions/http.exception.filter';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 import { generateDocument } from './doc';
+import { FastifyLogger } from './common/logger';
+import fastify, { FastifyInstance } from 'fastify';
 
 declare const module: any;
 
 async function bootstrap() {
+  const fastifyInstance: FastifyInstance = fastify({
+    logger: FastifyLogger,
+  });
+
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter(),
+    new FastifyAdapter(fastifyInstance),
   );
 
   // 统一响应体格式
